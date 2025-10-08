@@ -1,6 +1,10 @@
 
 import java.util.Scanner;
 
+/*
+    Esta código muestra un menú interactivo en el que el usuario puede convertir diferentes unidades de longitud.
+    Puede pasar de kilómetros a metros, de metros a centímetros, de kilómetros a yardas y de metros a millas.
+ */
 public class ConversorUnidades {
 
     public static void main(String[] args) {
@@ -19,75 +23,71 @@ public class ConversorUnidades {
 
             switch (opcion) {
                 case "1" -> {
+                    double km = pedirKilometros(sc);
+                    kmAMetros(km);
                 }
 
                 case "2" -> {
+                    double m = pedirMetros(sc);
+                    metrosACm(m);
                 }
 
                 case "3" -> {
+                    double km = pedirKilometros(sc);
+                    kmAYardas(km);
                 }
 
                 case "4" -> {
+                    double m = pedirMetros(sc);
+                    metrosAMillas(m);
                 }
 
-                case "5" ->
+                case "5" -> {
                     System.out.println("Saliendo del programa...");
+                }
 
-                default ->
-                    System.out.println("Opción inválida");
+                default -> {
+                    double km = pedirKilometros(sc);
+                    double m = pedirMetros(sc);
+                    calcularTodo(km, m);
+                }
             }
         } while (!opcion.equals("5"));
 
         sc.close();
     }
-}
-import java.util.Scanner;
 
-public class ConversorUnidades {
-    
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        
-        // Por ahora ejecuta todo directamente
-        double km = pedirKilometros(scanner);
-        double metros = pedirMetros(scanner);
-        calcularTodo(km, metros);
-        
-        scanner.close();
-    }
-    
-    // Estos métodos se usarán cuando haya menú
     public static double pedirKilometros(Scanner scanner) {
         System.out.print("Ingresa kilómetros: ");
         return scanner.nextDouble();
     }
-    
+
     public static double pedirMetros(Scanner scanner) {
         System.out.print("Ingresa metros: ");
         return scanner.nextDouble();
     }
-    
+
     public static void calcularTodo(double km, double metros) {
         System.out.println("\n--- RESULTADOS ---");
-        System.out.println(km + " km = " + (km * 1000) + " metros");
-        System.out.println(metros + " metros = " + (metros * 100) + " cm");
-        System.out.println(km + " km = " + (km * 1093.61) + " yardas");
-        System.out.println(metros + " metros = " + (metros * 0.000621371) + " millas");
+        kmAMetros(km);
+        metrosACm(metros);
+        kmAYardas(km);
+        metrosAMillas(metros);
     }
-    
-    // Para el menú futuro:
+
+    // Métodos para el menú
     public static void kmAMetros(double km) {
         System.out.println(km + " km = " + (km * 1000) + " metros");
     }
-    
+
     public static void metrosACm(double metros) {
         System.out.println(metros + " metros = " + (metros * 100) + " cm");
     }
-    
+
     public static void kmAYardas(double km) {
         System.out.println(km + " km = " + (km * 1093.61) + " yardas");
     }
-    
+
     public static void metrosAMillas(double metros) {
         System.out.println(metros + " metros = " + (metros * 0.000621371) + " millas");
     }
